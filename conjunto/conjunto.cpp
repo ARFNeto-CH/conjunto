@@ -6,7 +6,7 @@
 
 using namespace std;
 
-class Erro_op_Conjunto : public exception
+class Erro_Operacao_Conjunto : public exception
 {
 public:
 	virtual const char* what() const throw()
@@ -44,6 +44,16 @@ public:
 		tamanho = original.tamanho;
 	}
 
+	Conjunto(const Conjunto&& original)	noexcept// construtor de copia
+	{
+		for (auto i : original.elementos)
+		{
+			elementos.insert(i);
+		};	// copia todos
+		nome = "movido de " + original.nome;
+		tamanho = original.tamanho;
+	}
+
 	void 			aborta() const;
 	void			define_nome(string);
 	void			insere(int);
@@ -70,54 +80,6 @@ public:
 };	// end class Conjunto
 
 
-int teste_trata_excecao()
-{
-	try
-	{
-		Conjunto	c;
-		Conjunto	d("D");
-		Conjunto	e("2 pares", 2, 4, 2);
-		Conjunto	f("teste", 10, 30, 1);
-		cout << f << endl << "teste " << endl;;
-
-		cout << c.ve_nome() << " tem agora " << c.ve_tamanho() << " elemetos" << endl;
-		c.define_nome("outro");
-		cout << c.ve_nome() << " tem agora " << c.ve_tamanho() << " elementos" << endl;
-
-		cout << c << endl;
-		cout << c << d << endl;
-		cout << e << endl;
-
-		Conjunto a("a", 2, 4, 2);
-		Conjunto b("b", 1, 3, 2);
-		Conjunto produto;
-		Conjunto soma;
-		cout << a << endl;
-		cout << "calculando a = a + 6" << endl;
-		a = a + 6;
-		cout << a << endl;
-		cout << b << endl;
-		cout << "calculando b = 5 + b" << endl;
-		b = 5 + b;
-		cout << b << endl;
-		cout << "somando soma = a + b" << endl;
-		soma = a + b;
-		cout << soma << endl;
-		cout << "multiplicando  produto = a + b" << endl;
-		produto = a * b;
-		cout << produto << endl;
-		cout << "dividindo  b = a / b vai abortar porque nao foi implementado ainda" << endl;
-		b = a / b;
-	}
-	catch (Erro_op_Conjunto& excecao)
-	{
-		cout << excecao.what() << endl;
-		cout << "Erro de operacao em Conjunto foi capturado: retorna normalmente" << endl;
-	}	// end try
-	return 0;
-}
-
-
 int teste_nao_trata_excecao()
 {
 	Conjunto a, b;
@@ -127,130 +89,166 @@ int teste_nao_trata_excecao()
 }
 
 
-int teste_outro()
-{
-	try
-	{
-		Conjunto a("teste", 1, 4, 1);
-		cout << a;
-		a = 300 + a + 300;
-		cout << a;
-		a = a + 300;
-		cout << a;
-		a = 400 + 400 + a;
-		cout << a;
-		a = 401 + (400 + a);
-		cout << a;
-
-		//Conjunto	c("3", 1, 3, 1);
-		//Conjunto	d("2", 1, 2, 1);
-		//Conjunto expressao = (d + d) * c + 300;
-		//cout << c;
-		//cout << d;
-		//cout << expressao << endl;
-		//cout << c / d;		// vai cancelar aqui
-	}
-	catch (Erro_op_Conjunto& excecao)
-	{
-		cout << excecao.what() << endl;
-		cout << "Erro de operacao em Conjunto foi capturado: retorna normalmente" << endl;
-	}	// end try
-	return 0;
-}
-
-
 int teste_operacoes()
 {
 	// testa os operadores e construtores 
 	try
 	{
-		cout << "criando A = 1..5" << endl;
-		Conjunto A("A", 1, 5, 1);
-		cout << A;
+		{	// atribuicao na declaracao
+			cout << "criando A = 1..5" << endl;
+			Conjunto A("A", 1, 5, 1);
+			cout << A;
 
-		cout << "declarando B = A" << endl;
-		Conjunto B = A;
-		cout << B;
-
-		cout << "atribuindo  C = B" << endl;
-		Conjunto C;
-		C = B;
-		cout << C;
-
-		cout << "criando D = 3..7" << endl;
-		Conjunto D("D", 3, 7, 1);
-		cout << D;
-
-		cout << "mostrando A^D" << endl;
-		cout << (A ^ D);
-
-		cout << "mostrando A-D" << endl;
-		cout << (A - D);
-
-		cout << endl << "testando A != D: ";
-		if (A != D)
-		{
-			cout << "diferentes" << endl;
+			cout << "declarando B = A" << endl;
+			Conjunto B = A;
+			cout << B;
 		}
-		else
-		{
-			cout << "iguais" << endl;
-		};	// end if
 
-		Conjunto F("A", 1, 5, 1);	// iguazinho a A
-		cout << endl << "testando A == F: ";
-		if (A == F)
-		{
-			cout << "iguais" << endl;
+		{	// atribuicao
+			cout << "atribuindo  B = A" << endl;
+			cout << "criando A = 5..10" << endl;
+			Conjunto A("A", 5, 10, 1);
+			Conjunto B;
+			B = A;
+			cout << B;
 		}
-		else
+
+		{	// ^ interseccao
+			Conjunto A("A", 1,  5, 1);
+			Conjunto B("B", 3, 10, 1);
+			cout << "criando A^B" << endl;
+			Conjunto C = A ^ B;
+			cout << A << B << C;
+		}
+
+		{	// diferenca Conjunto - Conjunto
+			Conjunto A("A", 1, 10, 1);
+			Conjunto B("B", 4, 8, 1);
+			cout << "criando A - B" << endl;
+			Conjunto C = A - B;
+			cout << A << B << C;
+		}
+		 
+		{	// desigualdade !=
+			Conjunto A("A", 1, 10, 1);
+			Conjunto B("B", 4, 8, 1);
+			cout << "testando desigualdade A != B" << endl;
+			cout << A << B;
+			if (A != B)
+			{
+				cout << "diferentes" << endl;
+			}
+			else
+			{
+				cout << "iguais" << endl;
+			};	// end if
+		}
+
+		{	// igualdade ==
+			Conjunto A("idem", 1, 10, 1);
+			Conjunto B("idem", 1, 10, 1);
+			cout << A << B;
+			cout << "testando igualdade A == B" << endl;
+			if (A == B)
+			{
+				cout << "iguais" << endl;
+			}
+			else
+			{
+				cout << "diferentes" << endl;
+			};	// end if
+		}
+
+		{	// diferenca Conjunto B = A - (int)
+			cout << endl;
+			cout << " diferenca com (int)" << endl;
+			Conjunto A("A", 1, 5, 1);
+			int i = 1;
+			Conjunto B = A - i;
+			cout << " Conjunto B = A - (i=1)";
+			cout << A << B;
+		}
+
+		{	// diferenca B = A - (int)
+			cout << endl;
+			cout << " diferenca com (int)" << endl;
+			Conjunto A("A", 1, 5, 1);
+			int i = 5;
+			Conjunto B;
+			B = A - i;
+			cout << "B = A - (i=5)";
+			cout << A << B;
+		}
+
+
+		{	// soma Conjunto + (int)
+			cout << endl;
+			cout << " soma com (int)" << endl;
+			cout << " soma com (int)" << endl;
+			cout << " soma com (int)" << endl;
+
+			Conjunto A("A+int", 1, 5, 1);
+			int i = 0;
+			cout << endl;
+			cout << " Conjunto + (int) = 0" << endl;
+			cout << A;
+			cout << " Conjunto B = A + 0";
+			Conjunto B = A + i;
+			cout << B;
+			cout << " C = A + 0";
+			Conjunto C;
+			C = A + i;
+			cout << C;
+		}
+
+		{	// soma (int) + Conjunto
+			cout << endl;
+			cout << "(int) + Conjunto" << endl;
+			cout << "(int) + Conjunto" << endl;
+			cout << "(int) + Conjunto" << endl;
+
+			Conjunto A("int+A", 1, 5, 1);
+			int i = 0;
+			cout << endl;
+			cout << "(int) + Conjunto" << endl;
+			cout << A;
+			cout << " Conjunto B = 0 + A";
+			Conjunto B = i + A;
+			cout << B;
+			cout << " C = 0 + A";
+			Conjunto C;
+			C = i + A;
+			cout << C;
+		}
+
 		{
-			cout << "diferentes" << endl;
-		};	// end if
-
-		cout << "tirando 3 de F" << endl;
-		F = (F - 3);
-		cout << F;
-
-		cout << "F + 6" << endl;
-		cout << F + 6;
-
-		cout << "G = F - 2" << endl;
-		Conjunto G = F - 2;
-		cout << G;
-
-		cout << "G - 1" << endl;
-		cout << G - 1;
-
-		cout << "A, F, A - F" << endl;
-		cout << A << F << A - F;
-
+			cout << endl << "testa excecao tentando dividir C = A / B" << endl;
+			Conjunto A("int+A", 1, 5, 1);
+			Conjunto B("int+A", 1, 5, 1);
+			B = B / A;
+		}
 	}
-	catch (Erro_op_Conjunto& excecao)
+	catch (Erro_Operacao_Conjunto& excecao)
 	{
 		cout << excecao.what() << endl;
 		cout << "Erro de operacao em Conjunto foi capturado: retorna normalmente" << endl;
 	}	// end try
 	return 0;
-}
+}	// end teste_operacoes()
 
 
 int main(int argc, char** argv)
 {
 	teste_operacoes();
-	//teste_outro();
-	//teste_trata_excecao();
-	//cout << "***** voltou do teste *****" << endl;
-	//cout << "***** agora testa sem tratar erro em Conjunto *****" << endl;
+	cout << "em main() depois dos testes. Encerrando" << endl;
 	//teste_nao_trata_excecao();
-	//cout << "***** voltou do teste *****" << endl;
 	return 0;
 }	// end main()
 
 
 void  Conjunto::aborta() const
 {
-	throw Erro_op_Conjunto();
+	throw Erro_Operacao_Conjunto();
 }
 
 
@@ -415,6 +413,8 @@ Conjunto operator+(const Conjunto& a, const Conjunto& b)
 
 Conjunto operator-(const Conjunto& conjunto, const int valor)
 {
+	cout << " Conjunto - int" << endl;
+
 	Conjunto menosInt("'" + conjunto.nome + "' - int");
 	for (auto i : conjunto.elementos)
 	{
