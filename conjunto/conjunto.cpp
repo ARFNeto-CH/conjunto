@@ -40,7 +40,7 @@ public:
 		{
 			elementos.insert(i);
 		};	// copia todos
-		nome = "copiado de " + original.nome;
+		nome = "(copiado) " + original.nome;
 		tamanho = original.tamanho;
 	}
 
@@ -50,7 +50,8 @@ public:
 		{
 			elementos.insert(i);
 		};	// copia todos
-		nome = "movido de " + original.nome;
+		//nome = "(movido) " + original.nome;
+		nome = original.nome;
 		tamanho = original.tamanho;
 	}
 
@@ -184,8 +185,6 @@ int teste_operacoes()
 		{	// soma Conjunto + (int)
 			cout << endl;
 			cout << " soma com (int)" << endl;
-			cout << " soma com (int)" << endl;
-			cout << " soma com (int)" << endl;
 
 			Conjunto A("A+int", 1, 5, 1);
 			int i = 0;
@@ -203,8 +202,6 @@ int teste_operacoes()
 
 		{	// soma (int) + Conjunto
 			cout << endl;
-			cout << "(int) + Conjunto" << endl;
-			cout << "(int) + Conjunto" << endl;
 			cout << "(int) + Conjunto" << endl;
 
 			Conjunto A("int+A", 1, 5, 1);
@@ -284,20 +281,19 @@ int const Conjunto::ve_tamanho() const
 
 const Conjunto& Conjunto::operator=(const Conjunto& original)
 {
-	nome = "= " + original.nome;
+	nome = "=(" + original.nome + ")";
 	tamanho = original.tamanho;
 	for (auto i : original.elementos)
 	{
 		elementos.insert(i);
 	};	// copia todos
-	nome = "= a '" + original.nome + "'";
 	tamanho = original.tamanho;
 	return *this;
-}
+};
 
 
 bool Conjunto::operator==(const Conjunto& original)
-{
+{	// se algo for diferente não é igual :)
 	if (nome != original.nome) return false;
 	if (tamanho != original.tamanho) return false;
 	if (elementos != original.elementos) return false;
@@ -306,23 +302,23 @@ bool Conjunto::operator==(const Conjunto& original)
 
 
 bool Conjunto::operator!=(const Conjunto& original)
-{
+{	// se algo for diferente entao basta
 	if (nome != original.nome) return true;
 	if (tamanho != original.tamanho) return true;
 	if (elementos != original.elementos) return true;
 	return false;
-}
+};
 
 
 ostream& operator<<(ostream& o, const Conjunto& conjunto)
 {
-	o << endl;
+	o << endl << "= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =" << endl;
 	o << "Conjunto: '" << conjunto.nome << "'" << endl << endl;
 	o << "     Elementos:...." << conjunto.tamanho << endl;
 	// estara vazio?
 	if (conjunto.elementos.size() == 0)	return o;
 
-	o << endl << "{" << endl;
+	o << "{" << endl;
 	int n = 0;
 
 	for (auto i : conjunto.elementos)
@@ -332,7 +328,7 @@ ostream& operator<<(ostream& o, const Conjunto& conjunto)
 		if (n % 5 == 0) cout << endl;
 	}
 	o << endl << "}" << endl;
-	o << endl << "Fim do conjunto '" << conjunto.nome << "'" << endl << endl;
+	o << endl << "Fim do conjunto '" << conjunto.nome << "'" << endl;
 	return o;
 };	// end operator<<
 
@@ -341,18 +337,18 @@ Conjunto operator^(const Conjunto& a, const Conjunto& b)
 {
 	// retorna a interseccao de A e B, conjunto com 
 	// apenas os valores comuns
-	Conjunto inter(a.nome + "^" + b.nome);
+	Conjunto inter("(" + a.nome + ")^(" + b.nome + ")");
 	for (auto i : a.elementos)
 		if (b.elementos.find(i) != b.elementos.end())
 			inter.elementos.insert(i);
 	inter.tamanho = (unsigned short) inter.elementos.size();
 	return inter;
-};
+};	// end operator^
 
 
 Conjunto operator*(const Conjunto& a, const Conjunto& b)
 {
-	Conjunto produto(a.nome + "*" + b.nome);
+	Conjunto produto("(" + a.nome + ")*(" + b.nome + ")");
 	for (auto x : a.elementos)
 	{
 		for (auto y : b.elementos)
@@ -366,7 +362,7 @@ Conjunto operator*(const Conjunto& a, const Conjunto& b)
 
 
 Conjunto operator/(const Conjunto& a, const Conjunto& b)
-{
+{	// excecao: nao implementado
 	a.aborta();
 	return a;
 };	// end operator/
@@ -382,20 +378,29 @@ Conjunto operator+(const Conjunto& conjunto, const int valor)
 	soma.tamanho = conjunto.tamanho;	// claro
 	if (conjunto.elementos.find(valor) == conjunto.elementos.end())
 		soma.elementos.insert(valor);
-	soma.tamanho = (unsigned short) soma.elementos.size();
+	soma.tamanho = (unsigned short)soma.elementos.size();
 	return soma;
-}	// end operator+
+};	// end operator+
 
 
 Conjunto operator+(const int valor, const Conjunto& conjunto)
 {
-	return operator+(conjunto, valor);
+	Conjunto soma(conjunto.nome);
+	for (auto i : conjunto.elementos)
+	{
+		soma.elementos.insert(i);
+	};	// copia todos
+	soma.tamanho = conjunto.tamanho;	// claro
+	if (conjunto.elementos.find(valor) == conjunto.elementos.end())
+		soma.elementos.insert(valor);
+	soma.tamanho = (unsigned short)soma.elementos.size();
+	return soma;
 }	// end operator+
 
 
 Conjunto operator+(const Conjunto& a, const Conjunto& b)
 {
-	Conjunto soma("'" + a.nome + "' + '" + b.nome + "'");
+	Conjunto soma("(" + a.nome + ")+(" + b.nome + ")");
 	for (auto i : a.elementos)
 	{
 		soma.elementos.insert(i);
@@ -408,14 +413,12 @@ Conjunto operator+(const Conjunto& a, const Conjunto& b)
 		soma.tamanho += 1;
 	}	// copia todos de b que nao estavam em a 
 	return soma;
-}	// end operator+
+};	// end operator+
 
 
 Conjunto operator-(const Conjunto& conjunto, const int valor)
 {
-	cout << " Conjunto - int" << endl;
-
-	Conjunto menosInt("'" + conjunto.nome + "' - int");
+	Conjunto menosInt(conjunto.nome);
 	for (auto i : conjunto.elementos)
 	{
 		menosInt.elementos.insert(i);
@@ -433,7 +436,7 @@ Conjunto operator-(const Conjunto& conjunto, const int valor)
 
 Conjunto operator-(const Conjunto& a, const Conjunto& b)
 {
-	Conjunto diferenca("'" + a.nome + "' - '" + b.nome + "'");
+	Conjunto diferenca("(" + a.nome + ")-(" + b.nome + ")");
 	// retorna a diferenca de A e B, conjunto com 
 	// apenas os valores de A que nao estao em B
 	for (auto i : a.elementos)

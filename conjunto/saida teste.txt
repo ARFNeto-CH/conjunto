@@ -1,49 +1,46 @@
 criando A = 1..5
 
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 Conjunto: 'A'
 
      Elementos:....5
-
 {
      1     2     3     4     5
 
 }
 
 Fim do conjunto 'A'
-
 declarando B = A
 
-Conjunto: 'copiado de A'
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+Conjunto: '(copiado) A'
 
      Elementos:....5
-
 {
      1     2     3     4     5
 
 }
 
-Fim do conjunto 'copiado de A'
-
+Fim do conjunto '(copiado) A'
 atribuindo  B = A
 criando A = 5..10
 
-Conjunto: '= a 'A''
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+Conjunto: '=(A)'
 
      Elementos:....6
-
 {
      5     6     7     8     9
     10
 }
 
-Fim do conjunto '= a 'A''
-
+Fim do conjunto '=(A)'
 criando A^B
 
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 Conjunto: 'A'
 
      Elementos:....5
-
 {
      1     2     3     4     5
 
@@ -51,11 +48,10 @@ Conjunto: 'A'
 
 Fim do conjunto 'A'
 
-
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 Conjunto: 'B'
 
      Elementos:....8
-
 {
      3     4     5     6     7
      8     9    10
@@ -63,23 +59,21 @@ Conjunto: 'B'
 
 Fim do conjunto 'B'
 
-
-Conjunto: 'movido de A^B'
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+Conjunto: '(A)^(B)'
 
      Elementos:....3
-
 {
      3     4     5
 }
 
-Fim do conjunto 'movido de A^B'
-
+Fim do conjunto '(A)^(B)'
 criando A - B
 
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 Conjunto: 'A'
 
      Elementos:....10
-
 {
      1     2     3     4     5
      6     7     8     9    10
@@ -88,11 +82,10 @@ Conjunto: 'A'
 
 Fim do conjunto 'A'
 
-
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 Conjunto: 'B'
 
      Elementos:....5
-
 {
      4     5     6     7     8
 
@@ -100,24 +93,22 @@ Conjunto: 'B'
 
 Fim do conjunto 'B'
 
-
-Conjunto: 'movido de 'A' - 'B''
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+Conjunto: '(A)-(B)'
 
      Elementos:....5
-
 {
      1     2     3     9    10
 
 }
 
-Fim do conjunto 'movido de 'A' - 'B''
-
+Fim do conjunto '(A)-(B)'
 testando desigualdade A != B
 
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 Conjunto: 'A'
 
      Elementos:....10
-
 {
      1     2     3     4     5
      6     7     8     9    10
@@ -126,24 +117,22 @@ Conjunto: 'A'
 
 Fim do conjunto 'A'
 
-
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 Conjunto: 'B'
 
      Elementos:....5
-
 {
      4     5     6     7     8
 
 }
 
 Fim do conjunto 'B'
-
 diferentes
 
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 Conjunto: 'idem'
 
      Elementos:....10
-
 {
      1     2     3     4     5
      6     7     8     9    10
@@ -152,11 +141,10 @@ Conjunto: 'idem'
 
 Fim do conjunto 'idem'
 
-
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 Conjunto: 'idem'
 
      Elementos:....10
-
 {
      1     2     3     4     5
      6     7     8     9    10
@@ -164,17 +152,15 @@ Conjunto: 'idem'
 }
 
 Fim do conjunto 'idem'
-
 testando igualdade A == B
 iguais
 
  diferenca com (int)
- Conjunto - int
  Conjunto B = A - (i=1)
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 Conjunto: 'A'
 
      Elementos:....5
-
 {
      1     2     3     4     5
 
@@ -182,25 +168,22 @@ Conjunto: 'A'
 
 Fim do conjunto 'A'
 
-
-Conjunto: 'movido de 'A' - int'
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+Conjunto: 'A'
 
      Elementos:....4
-
 {
      2     3     4     5
 }
 
-Fim do conjunto 'movido de 'A' - int'
-
+Fim do conjunto 'A'
 
  diferenca com (int)
- Conjunto - int
 B = A - (i=5)
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 Conjunto: 'A'
 
      Elementos:....5
-
 {
      1     2     3     4     5
 
@@ -208,106 +191,94 @@ Conjunto: 'A'
 
 Fim do conjunto 'A'
 
-
-Conjunto: '= a 'movido de 'A' - int''
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+Conjunto: '=(A)'
 
      Elementos:....4
-
 {
      1     2     3     4
 }
 
-Fim do conjunto '= a 'movido de 'A' - int''
+Fim do conjunto '=(A)'
 
-
- soma com (int)
- soma com (int)
  soma com (int)
 
  Conjunto + (int) = 0
 
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 Conjunto: 'A+int'
 
      Elementos:....5
-
 {
      1     2     3     4     5
 
 }
 
 Fim do conjunto 'A+int'
-
  Conjunto B = A + 0
-Conjunto: 'movido de A+int'
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+Conjunto: 'A+int'
 
      Elementos:....6
-
 {
      0     1     2     3     4
      5
 }
 
-Fim do conjunto 'movido de A+int'
-
+Fim do conjunto 'A+int'
  C = A + 0
-Conjunto: '= a 'movido de A+int''
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+Conjunto: '=(A+int)'
 
      Elementos:....6
-
 {
      0     1     2     3     4
      5
 }
 
-Fim do conjunto '= a 'movido de A+int''
+Fim do conjunto '=(A+int)'
 
-
-(int) + Conjunto
-(int) + Conjunto
 (int) + Conjunto
 
 (int) + Conjunto
 
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 Conjunto: 'int+A'
 
      Elementos:....5
-
 {
      1     2     3     4     5
 
 }
 
 Fim do conjunto 'int+A'
-
  Conjunto B = 0 + A
-Conjunto: 'movido de int+A'
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+Conjunto: 'int+A'
 
      Elementos:....6
-
 {
      0     1     2     3     4
      5
 }
 
-Fim do conjunto 'movido de int+A'
-
+Fim do conjunto 'int+A'
  C = 0 + A
-Conjunto: '= a 'movido de int+A''
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+Conjunto: '=(int+A)'
 
      Elementos:....6
-
 {
      0     1     2     3     4
      5
 }
 
-Fim do conjunto '= a 'movido de int+A''
-
+Fim do conjunto '=(int+A)'
 
 testa excecao tentando dividir C = A / B
 Conjunto: Operacao Invalida ou Nao implementada ainda
 Erro de operacao em Conjunto foi capturado: retorna normalmente
 em main() depois dos testes. Encerrando
 
-C:\Users\toninho\source\repos\conjunto\Debug\conjunto.exe (process 3316) exited with code 0.
+C:\Users\toninho\source\repos\conjunto\Debug\conjunto.exe (process 11776) exited with code 0.
 Press any key to close this window . . .
